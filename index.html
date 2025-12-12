@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerço VT - Irmão Calvo • Irmão do Oriel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #fff; background: #0f0f0f; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navbar */
+        .navbar { background: linear-gradient(90deg, #000 0%, #1a1a1a 100%); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(255,0,0,0.3); }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .navbar h2 { font-size: 1.8rem; background: linear-gradient(45deg, #ff0000, #ff6600); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .navbar ul { list-style: none; display: flex; gap: 2rem; }
+        .navbar a { color: #fff; text-decoration: none; font-weight: bold; transition: all 0.3s; position: relative; }
+        .navbar a:hover { color: #ff0000; }
+        .navbar a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #ff0000; transition: width 0.3s; }
+        .navbar a:hover::after { width: 100%; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(20,0,0,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ff0000" stop-opacity="0.3"/><stop offset="100%" stop-color="%23000000" stop-opacity="0"/></radialGradient></defs><circle cx="50" cy="50" r="40" fill="url(%23g)"/></svg>'); height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 80px; }
+        .hero h1 { font-size: 5rem; margin-bottom: 1rem; text-shadow: 0 0 30px #ff0000; animation: glow 2s ease-in-out infinite alternate; }
+        .hero p { font-size: 1.8rem; margin-bottom: 2rem; opacity: 0.9; }
+        .btn { background: linear-gradient(45deg, #ff0000, #ff6600); color: #fff; padding: 1.2rem 3rem; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2rem; transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,0,0,0.4); display: inline-block; }
+        .btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 40px rgba(255,0,0,0.6); }
+        @keyframes glow { from { text-shadow: 0 0 20px #ff0000; } to { text-shadow: 0 0 40px #ff0000, 0 0 60px #ff0000; } }
+
+        /* Sections */
+        section { padding: 6rem 0; }
+        .sobre { background: linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%); }
+        .sobre h2, .videos h2, .social h2 { text-align: center; margin-bottom: 3rem; font-size: 3rem; background: linear-gradient(45deg, #ff6600, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sobre-content { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.3rem; line-height: 1.8; }
+
+        /* Videos */
+        .videos { background: #111; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem; }
+        .video-card { background: linear-gradient(145deg, #2a2a2a, #1a1a1a); border-radius: 20px; overflow: hidden; transition: all 0.4s; border: 2px solid transparent; }
+        .video-card:hover { transform: translateY(-15px) rotate(1deg); border-color: #ff0000; box-shadow: 0 25px 50px rgba(255,0,0,0.3); }
+        .video-card iframe { width: 100%; height: 220px; border: none; }
+        .video-info { padding: 1.5rem; }
+        .video-info h3 { color: #ff6600; margin-bottom: 0.5rem; font-size: 1.3rem; }
+        .video-info p { opacity: 0.8; }
+
+        /* Social */
+        .social { background: linear-gradient(135deg, #220000 0%, #110000 100%); padding: 4rem 0; }
+        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; text-align: center; }
+        .social-link { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; transition: all 0.3s; backdrop-filter: blur(10px); }
+        .social-link:hover { background: rgba(255,0,0,0.2); transform: scale(1.05); }
+        .social-link a { color: #fff; text-decoration: none; font-size: 1.5rem; display: block; }
+
+        /* Footer */
+        footer { background: #000; padding: 3rem 0 2rem; text-align: center; border-top: 3px solid #ff0000; }
+        footer p { opacity: 0.8; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar ul { flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #000; padding: 1rem 0; display: none; }
+            .navbar ul.active { display: flex; }
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.3rem; }
+            .video-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h2>🦥 Kerço VT</h2>
+            <ul id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+                <li><a href="#social">Social</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Kerço VT</h1>
+            <p>🦥 Irmão Calvo • Irmão do Oriel • Conteúdos +16 • Memes • Streams 🔥</p>
+            <a href="https://www.youtube.com/@ker%C3%A7oVT" class="btn" target="_blank">🎥 Assistir Agora</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>👋 Sobre o Kerço</h2>
+            <div class="sobre-content">
+                <p><strong>Kerço VT</strong>, o lendário <strong>Irmão Calvo</strong> e irmão do Oriel! VTuber brasileiro trazendo o melhor do entretenimento +16 com humor afiado, streams insanos e conteúdos que ninguém resiste.</p>
+                <p>Canal com <strong>3.76K inscritos</strong> e comunidade que cresce todo dia. Memes originais, lives épicas e aquele calvo que conquistou a internet brasileira!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos" class="videos">
+        <div class="container">
+            <h2>📺 Últimos Vídeos</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo 1" allowfullscreen></iframe>
+                    <div class="video-info">
+                        <h3>🔥 Título do Vídeo 1</h3>
+                        <p>Descrição incrível do conteúdo do Irmão Calvo...</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Vídeo 2" allowfullscreen></iframe>
+                    <div class="video-info">
+                        <h3>😂 Memes do Dia</h3>
+                        <p>O Irmão Calvo ataca novamente com os melhores memes!</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/OUTRO_VIDEO_ID" title="Vídeo 3" allowfullscreen></iframe>
+                    <div class="video-info">
+                        <h3>🎮 Live Épica</h3>
+                        <p>Stream insano com a galera - não perca!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social" class="social">
+        <div class="container">
+            <h2>📱 Siga o Kerço</h2>
+            <div class="social-grid">
+                <div class="social-link">
+                    <a href="https://www.youtube.com/@ker%C3%A7oVT" target="_blank">📺 YouTube<br>@kerçoVT</a>
+                </div>
+                <div class="social-link">
+                    <a href="https://twitch.tv/kerchow" target="_blank">🎮 Twitch<br>kerchow</a>
+                </div>
+                <div class="social-link">
+                    <a href="#" target="_blank">🐦 Twitter<br>@kerçoVT</a>
+                </div>
+                <div class="social-link">
+                    <a href="#" target="_blank">💬 Discord<br>Junte-se!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Kerço VT - Irmão Calvo • Irmão do Oriel | Feito com 🔥 para a família VTuber</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
