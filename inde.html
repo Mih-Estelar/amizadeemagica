@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amizade É Mágica VTuber ✨</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Chewy&family=Pacifico&family=Nosifer&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body { 
+            font-family: 'Fredoka One', 'Comic Sans MS', cursive, sans-serif; 
+            background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #ffd3a5, #fdcdb7, #e0bbed);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: #4a4a4a;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .tabs { 
+            display: flex; 
+            background: rgba(255,255,255,0.9); 
+            backdrop-filter: blur(10px);
+            overflow-x: auto; 
+            box-shadow: 0 8px 32px rgba(31,38,135,0.37);
+            padding: 0;
+            z-index: 1000;
+            position: sticky;
+            top: 0;
+        }
+
+        .tab-btn { 
+            padding: 15px 25px; 
+            border: none; 
+            background: none; 
+            color: #6a0572; 
+            cursor: pointer; 
+            font-family: 'Fredoka One', cursive;
+            font-size: 16px;
+            white-space: nowrap;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover { 
+            background: rgba(233,69,96,0.2); 
+            transform: scale(1.05); 
+        }
+
+        .tab-btn.active { 
+            background: linear-gradient(45deg, #ff69b4, #dda0dd); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(255,105,180,0.4);
+        }
+
+        .tab { display: none; padding: 30px; min-height: 70vh; }
+        .tab.active { display: block !important; }
+
+        .mlp-hero {
+            text-align: center;
+            padding: 150px 20px 100px;
+            position: relative;
+            min-height: 90vh;
+            background: 
+                linear-gradient(rgba(135,206,235,0.8), rgba(152,216,200,0.7)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="bg1" cx="0.5" cy="0.25" r="0.5"><stop offset="0%" stop-color="%23FFD700"/><stop offset="50%" stop-color="%23FFA500"/><stop offset="100%" stop-color="%23FF69B4"/></radialGradient><radialGradient id="bg2" cx="0.8" cy="0.6" r="0.4"><stop offset="0%" stop-color="%23FFB6C1"/><stop offset="70%" stop-color="%23F0E68C"/><stop offset="100%" stop-color="%23E6E6FA"/></radialGradient></defs><rect width="1200" height="800" fill="%23E0F6FF"/><ellipse cx="300" cy="200" rx="250" ry="150" fill="url(%23bg1)" opacity="0.6"/><ellipse cx="900" cy="500" rx="200" ry="120" fill="url(%23bg2)" opacity="0.4"/><path d="M100 300 Q400 100 700 300 T1100 300" stroke="%23FF69B4" stroke-width="8" fill="none" opacity="0.3"/><circle cx="150" cy="150" r="80" fill="%23FFD700" opacity="0.5"/><circle cx="1050" cy="450" r="60" fill="%23FF1493" opacity="0.4"/></svg>');
+            background-size: cover, 1200px 800px;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .mlp-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,215,0,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,105,180,0.4) 0%, transparent 50%);
+            animation: ponyMagic 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes ponyMagic {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.05); }
+        }
+
+        .mlp-hero > * { position: relative; z-index: 10; }
+
+        .pony-castle { margin: 50px 0; }
+        .mlp-logo {
+            font-family: 'Nosifer', cursive;
+            font-size: 4.5em;
+            background: linear-gradient(45deg, #8B008B, #FF1493, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,105,180,0.8);
+            animation: castleGlow 2s ease-in-out infinite;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        @keyframes castleGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px #FF69B4); }
+            50% { filter: drop-shadow(0 0 40px #FFD700); }
+        }
+
+        .crown {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            animation: crownBounce 1.5s infinite;
+            filter: drop-shadow(0 0 20px #FFD700);
+        }
+
+        @keyframes crownBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-50%) translateY(-15px) rotate(5deg); }
+            75% { transform: translateX(-50%) translateY(-8px) rotate(-5deg); }
+        }
+
+        .mlp-welcome {
+            font-family: 'Chewy', cursive !important;
+            font-size: 2.8em;
+            margin: 40px 0;
+            font-weight: bold;
+            animation: mlpTextGlow 4s ease-in-out infinite;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, #FF1493, #FFD700, #00CED1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #FF69B4;
+        }
+
+        @keyframes mlpTextGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px #FF69B4); }
+            25% { filter: drop-shadow(0 0 25px #FFD700); }
+            50% { filter: drop-shadow(0 0 25px #00CED1); }
+            75% { filter: drop-shadow(0 0 25px #32CD32); }
+        }
+
+        .mlp-subtitle {
+            font-family: 'Pacifico', cursive !important;
+            font-size: 2.2em;
+            margin: 20px 0 60px;
+            font-style: italic;
+            background: linear-gradient(45deg, #8B008B, #9370DB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px #9370DB;
+        }
+
+        .mlp-btn {
+            display: inline-block;
+            padding: 25px 60px;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1, #FF1493, #C71585);
+            color: white;
+            text-decoration: none;
+            border-radius: 60px;
+            font-family: 'Fredoka One', cursive !important;
+            font-size: 1.5em;
+            font-weight: bold;
+            transition: all 0.4s;
+            box-shadow: 0 20px 45px rgba(255,105,180,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mlp-btn::before {
+            content: '🌈✨';
+            position: absolute;
+            left: -70px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.4s;
+            font-size: 1.2em;
+        }
+
+        .mlp-btn:hover::before { left: 25px; }
+        .mlp-btn:hover { 
+            transform: scale(1.15) translateY(-10px); 
+            box-shadow: 0 30px 60px rgba(255,105,180,0.9);
+        }
+
+        .cutie-marks {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .cutie-mark {
+            display: inline-block;
+            font-size: 3em;
+            margin: 0 20px;
+            animation: cutieMarkSpin 3s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));
+        }
+
+        .cutie-mark:nth-child(1) { animation-delay: 0s; }
+        .cutie-mark:nth-child(2) { animation-delay: 0.5s; }
+        .cutie-mark:nth-child(3) { animation-delay: 1s; }
+        .cutie-mark:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes cutieMarkSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.3); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .single-vtuber {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            padding: 30px;
+        }
+
+        .pony-card { 
+            background: rgba(255,255,255,0.95); 
+            border-radius: 30px; 
+            padding: 40px; 
+            text-align: center; 
+            transition: all 0.5s; 
+            border: 5px solid transparent;
+            position: relative;
+            backdrop-filter: blur(15px);
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pony-card::before {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            background: linear-gradient(45deg, #ff69b4, #dda0dd, #e94560, #a8e6cf, #ff69b4);
+            background-size: 400% 400%;
+            animation: borderRotate 3s linear infinite;
+            border-radius: 35px;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .pony-card:hover::before { opacity: 1; }
+        .pony-card:hover { 
+            transform: translateY(-20px) scale(1.08); 
+            box-shadow: 0 35px 70px rgba(0,0,0,0.3);
+        }
+
+        .vtuber-img { 
+            width: 200px; 
+            height: 200px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 10px solid #ff69b4; 
+            margin-bottom: 25px;
+            filter: drop-shadow(0 15px 30px rgba(255,105,180,0.5));
+            transition: all 0.4s;
+        }
+
+        .pony-card:hover .vtuber-img {
+            transform: scale(1.1) rotate(5deg);
+            border-color: #FFD700;
+        }
+
+        .pony-card h3 { 
+            color: #6a0572; 
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.5em; 
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            background: linear-gradient(45deg, #FF1493, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a { 
+            display: block; 
+            color: #4a4a4a; 
+            text-decoration: none; 
+            padding: 15px 25px; 
+            margin: 10px 0; 
+            border-radius: 30px; 
+            transition: all 0.4s;
+            font-size: 1.2em;
+            font-family: 'Fredoka One', cursive;
+            background: rgba(255,255,255,0.7);
+            border: 2px solid rgba(255,105,180,0.3);
+        }
+
+        .social-links a:hover { 
+            background: linear-gradient(45deg, #ff69b4, #dda0dd); 
+            color: white; 
+            transform: translateX(15px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255,105,180,0.5);
+        }
+
+        .rato-text {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #6a0572;
+            padding: 30px;
+            border-radius: 25px;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(255,215,0,0.4);
+            border: 4px solid rgba(255,165,0,0.6);
+            animation: ratoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes ratoGlow {
+            0%, 100% { box-shadow: 0 15px 35px rgba(255,215,0,0.4); }
+            50% { box-shadow: 0 15px 45px rgba(255,165,0,0.6); }
+        }
+
+        @keyframes float {
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .tabs { flex-direction: column; }
+            .mlp-logo { font-size: 3em; }
+            .mlp-welcome { font-size: 2em; }
+            .vtuber-img { width: 150px; height: 150px; }
+            .pony-card h3 { font-size: 2em; }
+            .rato-text { font-size: 1.2em; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="inicio"><i class="fas fa-home"></i> Início</button>
+        <button class="tab-btn" data-tab="oriel"><i class="fas fa-star"></i> Oriel</button>
+        <button class="tab-btn" data-tab="rato-branco"><i class="fas fa-mouse"></i> Rato Branco</button>
+        <button class="tab-btn" data-tab="kerco"><i class="fas fa-gamepad"></i> Kerço</button>
+        <button class="tab-btn" data-tab="zeze"><i class="fas fa-heart"></i> Zeze</button>
+        <button class="tab-btn" data-tab="puck"><i class="fas fa-hockey-puck"></i> Puck</button>
+        <button class="tab-btn" data-tab="titi"><i class="fas fa-bird"></i> Titi</button>
+        <button class="tab-btn" data-tab="smily"><i class="fas fa-smile"></i> Smily</button>
+        <button class="tab-btn" data-tab="kaze"><i class="fas fa-wind"></i> Kaze</button>
+    </nav>
+
+    <div class="tab-content">
+        <!-- INÍCIO -->
+        <section id="inicio" class="tab active">
+            <div class="mlp-hero">
+                <div class="pony-castle">
+                    <div class="crown">👑</div>
+                    <h1 class="mlp-logo">Amizade É Mágica</h1>
+                </div>
+                <p class="mlp-welcome">Venha conhecer nossa linda equipe!</p>
+                <p class="mlp-subtitle">"A Amizade É Mágica" ✨</p>
+                <div class="pony-buttons">
+                    <a href="#oriel" class="mlp-btn">Explorar Equestria 🌈</a>
+                </div>
+                <div class="cutie-marks">
+                    <span class="cutie-mark">⭐</span>
+                    <span class="cutie-mark">💎</span>
+                    <span class="cutie-mark">🌈</span>
+                    <span class="cutie-mark">🦋</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORIEL -->
+        <section id="oriel" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="oriel.jpeg" alt="Oriel" class="vtuber-img">
+                    <h3>Oriel ✨</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@Mih_Estelar" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://www.twitch.tv/mih_estelar" target="_blank"><i class="fab fa-twitch"></i> Twitch</a>
+                        <a href="https://www.tiktok.com/@mih_estelar" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RATO BRANCO -->
+        <section id="rato-branco" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="ratobranco.jpeg" alt="Rato Branco" class="vtuber-img">
+                    <h3>Rato Branco 🐭</h3>
+                    <div class="rato-text">
+                        <div>🧪 É um átomo amigo e ajudante nos jogos! 🕹️</div>
+                        <div style="font-size: 1.1em; margin-top: 15px; color: #FF4500;">Sempre apoiando a equipe com energia positiva! ⚡✨</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KERÇO -->
+        <section id="kerco" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="kerço.jpeg" alt="Kerço" class="vtuber-img">
+                    <h3>Kerço 🎮</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@ker%C3%A7oVT" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://www.tiktok.com/@kersoclips" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ZEZE -->
+        <section id="zeze" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="zeze.jpeg" alt="Zeze" class="vtuber-img">
+                    <h3>Zeze 💖</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@zezeguimas" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PUCK -->
+        <section id="puck" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="puck.jpeg" alt="Puck" class="vtuber-img">
+                    <h3>Puck 🏒</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@pngdrg" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://www.tiktok.com/@pu_puck" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TITI -->
+        <section id="titi" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="titi.jpeg" alt="Titi" class="vtuber-img">
+                    <h3>Titi 🐦</h3>
+                    <div class="social-links">
+                        <a href="https://www.tiktok.com/@titilives.br" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SMILY -->
+        <section id="smily" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="sminy.jpeg" alt="Smily" class="vtuber-img">
+                    <h3>Smily 😊</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@sminy_vt" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://www.tiktok.com/@smini_vt" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KAZE -->
+        <section id="kaze" class="tab">
+            <div class="single-vtuber">
+                <div class="pony-card">
+                    <img src="kaze.jpeg" alt="Kaze" class="vtuber-img">
+                    <h3>Kaze 💨</h3>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@kaze2678luz" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://www.twitch.tv/kaze_brown" target="_blank"><i class="fab fa-twitch"></i> Twitch</a>
+                        <a href="https://www.tiktok.com/@kaze_magodaluz" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabs = document.querySelectorAll('.tab');
+
+            tabBtns.forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    const targetTab = document.getElementById(this.dataset.tab);
+                    if (targetTab) {
+                        targetTab.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.innerHTML = '⭐';
+            star.style.cssText = `
+                position: fixed;
+                left: ${Math.random() * 100}vw;
+                top: 100vh;
+                font-size: ${Math.random() * 1 + 0.5}em;
+                pointer-events: none;
+                z-index: 9999;
+                animation: float ${Math.random() * 3 + 2}s linear forwards;
+                filter: drop-shadow(0 0 10px #FFD700);
+            `;
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 5000);
+        }
+
+        setInterval(createStar, 600);
+    </script>
+</body>
+</html>
